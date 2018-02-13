@@ -1,0 +1,23 @@
+dist: trusty
+language: elixir
+elixir:
+  - 1.5.0
+  - 1.5.1
+  - 1.5.2
+  - 1.5.3
+otp_release:
+  - 20.0
+sudo: required
+install:
+  - mix local.hex --force
+  - mix local.rebar --force
+  - mix deps.get
+  - MIX_ENV=test mix deps.compile
+script:
+  - mix test
+after_script:
+  - MIX_ENV=docs mix deps.get
+  - MIX_ENV=docs mix inch.report
+notifications:
+  recipients:
+    - ekuklu@icloud.com
